@@ -16,7 +16,7 @@ int Myputs(const char *str);
 char *Mystrncpy (char *str, const char *str1, size_t length);
 char *Mystrcpy  (char *str, const char *str1);
 
-size_t Mystrlen(const char *str);
+size_t Mystrlen(const unsigned char *str);
 const char* Mystrchr(const char* str, int symbol);
 
 char *Mystrcat  (char *str1, const char *str2);
@@ -25,6 +25,8 @@ char *Mystrncat (char *str, const char *str1, size_t sizestr);
 char* Myfgets (char *str, int strsize, FILE *fp);
 char* Mystrdup (char* str);
 
-int Mystrcmp(const char *str, const char *str1);
+int Mystrcmp(const unsigned char *str, const unsigned char *str1);
+
+void swap1 (unsigned char **str, unsigned char **str1);
 
 #endif

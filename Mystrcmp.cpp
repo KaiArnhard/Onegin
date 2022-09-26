@@ -1,17 +1,17 @@
 #include "Mystring.h"
 
-int Mystrcmp (const char* str, const char* str1)
+int Mystrcmp (const unsigned char *str, const unsigned char *str1)
 {
-    size_t max1 = Mystrlen (str);
-    size_t max2 = Mystrlen (str1);
+    size_t strsize  = Mystrlen(str);
+    size_t str1size = Mystrlen(str1);
     size_t maximum = 0;
 
-    if (max1 < max2)
-        maximum = max1;
+    if (strsize < str1size)
+        maximum = strsize;
     else
-        maximum = max2;
+        maximum = str1size;
 
-    for (size_t counter = 0; counter <= maximum; counter++)
+    for (size_t counter = 0; counter < maximum; counter++)
     {
         if (str [counter] < str1 [counter])
             return LESS;
@@ -20,16 +20,13 @@ int Mystrcmp (const char* str, const char* str1)
             return MORE;
 
     }
+    return EQUAL;
+}
 
-    if (max1 == max2)
-        return EQUAL;
-
-    else if (maximum == max1)
-        return LESS;
-
-    else if (maximum == max2)
-        return MORE;
-
-    assert(0 && "Wrong comparison");
+void swap1 (unsigned char **str, unsigned char **str1)
+{
+    unsigned char *pt = *str1;
+    *str1 = *str;
+    *str = pt;
 }
 

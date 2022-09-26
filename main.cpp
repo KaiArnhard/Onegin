@@ -3,14 +3,20 @@
 enum SizeOfStr
 {
 SIZEONEGIN = 181000,
-SIZEPTR = 10000,
+SIZEPTR = 5635,
+};
+
+struct Ptr
+{
+ unsigned char *Oneginptr[SIZEPTR] = {};
+ int sizeofstrs[SIZEPTR] = {};
 };
 
 void   inputonegin  (unsigned char *Onegin);
 void inputOneginptr (unsigned char *Onegin, unsigned char *Oneginptr[]);
 
 void outputOnegin (unsigned char *Oneginptr[]);
-void Mysort (unsigned char *Oneginptr[]);
+void Mysort (unsigned char *Oneginptr[], int (*Mystrcmp)(const unsigned char *str, const unsigned char *str1));
 
 int main()
 {
@@ -19,35 +25,40 @@ int main()
 
     inputonegin    (Onegin);
     inputOneginptr (Onegin, Oneginptr);
-    Mysort (Oneginptr);
+    Mysort (Oneginptr, Mystrcmp);
 
     outputOnegin (Oneginptr);
 
     return 0;
 }
 
-void Mysort(unsigned char *Oneginptr[])
+void Mysort (unsigned char *Oneginptr[], int (*Mystrcmp)(const unsigned char *str, const unsigned char *str1))
 {
     size_t fromstart  = 0;
-    size_t fromend    = SIZEPTR;
-    unsigned char *pt = 0;
+    size_t fromend = SIZEPTR - 1;
+    bool b = TRUE;
 
-    while (fromstart != SIZEPTR && fromend != 0)
+    while (b)
     {
-        if (Mystrcmp ((char*) Oneginptr [fromstart], (char*) Oneginptr [fromend]) > 0)
+        b = FALSE;
+        fromstart++;
+        for (size_t fromstart1 = fromstart; fromstart1 < fromend; fromstart1++)
         {
-            pt = Oneginptr [fromend];
-            Oneginptr [fromend] = Oneginptr [fromstart];
-            Oneginptr [fromstart] = pt;
+            if (Mystrcmp (Oneginptr [fromstart1], Oneginptr [fromstart1 + 1]) == 1)
+            {
+                swap1(&(Oneginptr[fromstart1]), &(Oneginptr[fromstart1 + 1]));
+                b = TRUE;
+            }
         }
-        else if (Mystrcmp ((char*) Oneginptr [fromstart], (char*) Oneginptr [fromend]) == 0)
-        {
-            pt = Oneginptr [fromstart];
-            Oneginptr [fromstart] = Oneginptr [fromend];
-            Oneginptr [fromend] = pt;
-        }
-        fromstart ++;
-        fromend --;
+        if(!b)
+            break;
+        fromend--;
+        for (size_t fromend1 = fromend; fromend1 > fromstart; fromend1--)
+            if (Mystrcmp (Oneginptr[fromend1], Oneginptr[fromend1 - 1]) == 0)
+            {
+                swap1(&(Oneginptr[fromend1]), &(Oneginptr[fromend1 - 1]));
+                b = TRUE;
+            }
     }
 
 }
@@ -64,19 +75,18 @@ void inputonegin (unsigned char *Onegin)
 
 void inputOneginptr (unsigned char *Onegin, unsigned char *Oneginptr[])
 {
-    int counter1 = 0;
-    Oneginptr [counter1] = Onegin;
-    counter1 ++;
-    for (size_t counter = 1; counter <= SIZEONEGIN; counter++)
+    int counterptr = 0;
+    Oneginptr [counterptr] = Onegin;
+    counterptr++;
+
+    for (size_t counter = 1; Onegin[counter] != '\0'; counter++)
     {
-        if ((Onegin [counter] == '\n') && (Onegin [counter + 1] != '\n'))
+        if ((Onegin [counter] == '\n') && (Onegin[counter + 1] != '\n'))
         {
-            Oneginptr [counter1] = Onegin + (counter + 1);
-            counter1 ++;
-            Onegin [counter] = '\0';
+            Oneginptr [counterptr] = Onegin + (counter + 1);
+            counterptr++;
+            Onegin[counter] = '\0';
         }
-        else if (Onegin [counter] == '\n')
-        Onegin [counter] = ' ';
     }
 }
 
@@ -86,7 +96,7 @@ void outputOnegin (unsigned char *Oneginptr[])
     FILE *fp1 = fopen (filename, "w");
     size_t counter = 0;
 
-    while ((Oneginptr [counter] != 0) && (counter <= 10000))
+    while ((Oneginptr [counter] != 0) && (counter < SIZEPTR))
     {
         fprintf (fp1, "%s\n", Oneginptr [counter]);
         counter++;
