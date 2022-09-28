@@ -25,7 +25,8 @@ char *Mystrncat (char *str, const char *str1, size_t sizestr);
 char* Myfgets (char *str, int strsize, FILE *fp);
 char* Mystrdup (char* str);
 
-int Mystrcmp(const unsigned char *str, const unsigned char *str1);
+int Mystrcmp(const unsigned char *str, const unsigned char *str1, size_t strsize, size_t str1size);
+bool compare(const unsigned char str);
 
 void swap1 (unsigned char **str, unsigned char **str1);
 
