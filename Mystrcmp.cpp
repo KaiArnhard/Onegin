@@ -1,54 +1,50 @@
 #include "Mystring.h"
 
-int Mystrcmp (const unsigned char *str, const unsigned char *str1, size_t strsize, size_t str1size)
+int Mystrcmp (const unsigned char *str, const unsigned char *str1)
 {
-    size_t maximum = 0;
+    int counter = 0;
+    int counter1 = 0;
+    int counter2 = 0;
 
-    if (strsize < str1size)
-        maximum = strsize;
-    else
-        maximum = str1size;
-    size_t counter1 = 0;
-    size_t counter2 = 0;
 
-    for (size_t counter = 0; counter < maximum; counter++)
+
+    for (; str[counter] != '\0' && str1[counter] != '\0'; counter++)
     {
-        counter1 = counter2 = counter;
-        if (!compare(str[counter]))
-        {
-            counter1 = counter + 1;
-        }
-        if (!compare(str1[counter]))
-        {
-            counter2 = counter + 1;
-        }
-
         if (str[counter1] < str1[counter2])
             return LESS;
 
         else if (str[counter1] > str1[counter2])
             return MORE;
-
     }
+    if (str[counter] == '\0')
+        return LESS;
+    else if (str1[counter] == '\0')
+        return MORE;
+
     return EQUAL;
 }
 
 void swap1 (unsigned char **str, unsigned char **str1)
 {
-    unsigned char *pt = *str1;
+    unsigned char *temp = *str1;
     *str1 = *str;
-    *str = pt;
+    *str = temp;
 }
 
-bool compare(const unsigned char str)
+//Велосипед
+int isletter(const unsigned char *str)
 {
-const unsigned char str2[] = "\n'\",;:. [";
+    const unsigned char str1[] = "'\",;:.[!?";
+    int  counter = 0;
 
-for (int counter = 0; str2[counter] != '\0'; counter++)
+    for (int counter1 = 0; str1[counter1] != '\0'; counter1++)
     {
-        if(str == str2[counter])
-            return FALSE;
+        if(str[counter] == str1[counter1])
+            {
+                counter++;
+            }
     }
-return TRUE;
+    return counter;
 }
 
+              //isalpha(char); ctype.h
