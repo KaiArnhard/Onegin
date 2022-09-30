@@ -1,19 +1,30 @@
 #include "Mystring.h"
 
-int Mystrcmpend (const unsigned char *str, const unsigned char *str1, int strsize, int str1size)
+int Mystrcmpend (const void *PtrToLine1, const void *PtrToLine2)
 {
-    int counter1 =  strsize - 1;
-    int counter2 = str1size - 1;
-    // TODO check for trash
-    for (; (counter1 >= 0) && (counter2 >= 0); counter1--, counter2--)
+    String *line1 = (String*) PtrToLine1;
+    String *line2 = (String*) PtrToLine2;
+
+    int counter1 = line1->lengthofstr - 1;
+    int counter2 = line2->lengthofstr - 1;
+
+    for (; counter1 >= 0 && counter2 >= 0; counter1--, counter2--)
     {
-        //if (isalpha(str[counter]) && is
-        if (str[counter1] < str1[counter2])
-            return LESS;
+            while(!isalpha(line1->ptrtostr[counter1]))
+                counter1--;
+            while(!isalpha(line1->ptrtostr[counter2]))
+                counter2--;
 
-        else if (str[counter1] > str1[counter2])
-            return MORE;
+            if (line1->ptrtostr[counter1] < line2->ptrtostr[counter1])
+                return LESS;
 
+            else if (line1->ptrtostr[counter1] > line2->ptrtostr[counter1])
+                return MORE;
     }
+    if(line1->lengthofstr < line2->lengthofstr)
+        return LESS;
+    else
+        return MORE;
+
     return EQUAL;
 }

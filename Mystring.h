@@ -2,32 +2,43 @@
 #define STRING_H
 
 #include "TXlib.h"
+#include <ctype.h>
 #include <assert.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+struct FileNames
+{
+    char *FNameOrig = "hamlet.txt";
+    char *FNameSort        = "hamletsort.txt";
+    char *FNameSortFromEnd = "hamletsortfromend.txt";
+    char *FNameOrigOut = "hamletorig.txt";
+};
+
+struct String
+{
+    char *ptrtostr = 0;
+    int  lengthofstr = 0;
+};
+struct Lengths
+{
+    int NumberOfLines = 0;
+    int LengthOfBuffer  = 0;
+};
 
 enum Solutions
 {
     MORE = 1,
-    LESS = 0,
-    EQUAL = -1,
+    LESS = -1,
+    EQUAL = 0,
 };
 
-int Myputs(const char *str);
+size_t Mystrlen(const char *str);
 
-char *Mystrncpy (char *str, const char *str1, size_t length);
-char *Mystrcpy  (char *str, const char *str1);
+int Mystrcmp   (const void *PtrToLine1, const void *PtrToLine2);
+int Mystrcmpend(const void *PtrToLine1, const void *PtrToLine2);
+int isletter(const unsigned char *str);
 
-size_t Mystrlen(const unsigned char *str);
-const char* Mystrchr(const char* str, int symbol);
-
-char *Mystrcat  (char *str1, const char *str2);
-char *Mystrncat (char *str, const char *str1, size_t sizestr);
-
-char* Myfgets (char *str, int strsize, FILE *fp);
-char* Mystrdup (char* str);
-
-int Mystrcmp(const unsigned char *str, const unsigned char *str1, size_t strsize, size_t str1size);
-bool compare(const unsigned char str);
-
-void swap1 (unsigned char **str, unsigned char **str1);
+void swap1 (char **str, char **str1);
 
 #endif
