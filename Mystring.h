@@ -9,20 +9,20 @@
 
 struct FileNames
 {
-    char *FNameOrig = "hamlet.txt";
+    char *FNameOrig        = "hamlet.txt";
     char *FNameSort        = "hamletsort.txt";
     char *FNameSortFromEnd = "hamletsortfromend.txt";
-    char *FNameOrigOut = "hamletorig.txt";
+    char *FNameOrigOut     = "hamletorig.txt";
 };
 
 struct String
 {
-    char *ptrtostr = 0;
+    char *ptrtostr   = 0;
     int  lengthofstr = 0;
 };
 struct Lengths
 {
-    int NumberOfLines = 0;
+    int NumberOfLines   = 0;
     int LengthOfBuffer  = 0;
 };
 
@@ -34,11 +34,6 @@ enum Solutions
 };
 
 size_t Mystrlen(const char *str);
-
-int Mystrcmp   (const void *PtrToLine1, const void *PtrToLine2);
-int Mystrcmpend(const void *PtrToLine1, const void *PtrToLine2);
 int isletter(const unsigned char *str);
-
-void swap1 (char **str, char **str1);
 
 #endif
