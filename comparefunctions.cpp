@@ -54,18 +54,24 @@ int Mystrcmp (const void *PtrToLine1, const void *PtrToLine2)
     return EQUAL;
 }
 
-void swap1 (String **PtrToLine1, String **PtrToLine2)
+void swap1 (String *PtrToLine1, String *PtrToLine2)
 {
-    String *temp = *PtrToLine2;
-    *PtrToLine2 = *PtrToLine1;
-    *PtrToLine1 = temp;
+    char *temp = PtrToLine2->ptrtostr;
+    int templength = PtrToLine2->lengthofstr;
+
+    PtrToLine2->ptrtostr = PtrToLine1->ptrtostr;
+    PtrToLine1->ptrtostr = temp;
+
+    PtrToLine2->lengthofstr = PtrToLine1->lengthofstr;
+    PtrToLine1->lengthofstr = templength;
 }
 
-void Mysort (String *PtrToLine, Lengths Length, int (*Mystrcmp)(const void *PtrToLine1, const void *PtrToLine2))
+void Mysort (void *PtrToLine, Lengths Length, int (*Mystrcmp)(const void *PtrToLine1, const void *PtrToLine2))
 {
     int fromstart  = -1;
     int fromend = Length.NumberOfLines - 1;
     bool b = TRUE;
+    String *line = (String *) PtrToLine;
 
     while (b)
     {
@@ -74,9 +80,9 @@ void Mysort (String *PtrToLine, Lengths Length, int (*Mystrcmp)(const void *PtrT
 
         for (int fromstart1 = fromstart; fromstart1 < fromend; fromstart1++)
         {
-            if (Mystrcmp((PtrToLine + fromstart1), (PtrToLine + fromstart1 + 1)) == MORE)
+            if (Mystrcmp((line + fromstart1), (line + fromstart1 + 1)) == MORE)
             {
-                swap1(&(PtrToLine + fromstart1), &(PtrToLine + fromstart1 + 1));
+                swap1(line + fromstart1, line + fromstart1 + 1);
                 b = TRUE;
             }
         }
@@ -84,9 +90,9 @@ void Mysort (String *PtrToLine, Lengths Length, int (*Mystrcmp)(const void *PtrT
             break;
         fromend--;
         for (int fromend1 = fromend; fromend1 > fromstart; fromend1--)
-            if (Mystrcmp((PtrToLine + fromend1), (PtrToLine + fromend1 - 1)) == LESS)
+            if (Mystrcmp((line + fromend1), (line + fromend1 - 1)) == LESS)
             {
-                swap1(&(PtrToLine + fromend1), &(PtrToLine + fromend1 - 1));
+                swap1(line + fromend1, line + fromend1 - 1);
                 b = TRUE;
             }
     }
