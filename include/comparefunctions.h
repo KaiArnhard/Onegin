@@ -1,6 +1,8 @@
 #ifndef COMPAREFUNCTIONS_H
 #define COMPAREFUNCTIONS_H
 
+#include "Mystring.h"
+
 int Mystrcmp   (const void *PtrToLine1, const void *PtrToLine2);
 int Mystrcmpend(const void *PtrToLine1, const void *PtrToLine2);
 

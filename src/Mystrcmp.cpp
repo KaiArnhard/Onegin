@@ -1,4 +1,4 @@
-#include "Mystring.h"
+#include "../include/Mystring.h"
 
 int Mystrcmp (const void *PtrToLine1, const void *PtrToLine2)
 {

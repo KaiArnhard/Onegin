@@ -1,5 +1,5 @@
-#include "Mystring.h"
-#include "comparefunctions.h"
+#include "../include/Mystring.h"
+#include "../include/comparefunctions.h"
 
 int Mystrcmpend(const void *PtrToLine1, const void *PtrToLine2)
 {
@@ -70,20 +70,20 @@ void Mysort (void *PtrToLine, Lengths Length, int (*Mystrcmp)(const void *PtrToL
 {
     int fromstart  = -1;
     int fromend = Length.NumberOfLines - 1;
-    bool b = TRUE;
+    bool b = true;
     String *line = (String *) PtrToLine;
 
     while (b)
     {
         fromstart++;
-        b = FALSE;
+        b = false;
 
         for (int fromstart1 = fromstart; fromstart1 < fromend; fromstart1++)
         {
             if (Mystrcmp((line + fromstart1), (line + fromstart1 + 1)) == MORE)
             {
                 swap1(line + fromstart1, line + fromstart1 + 1);
-                b = TRUE;
+                b = true;
             }
         }
         if(!b)
@@ -93,7 +93,7 @@ void Mysort (void *PtrToLine, Lengths Length, int (*Mystrcmp)(const void *PtrToL
             if (Mystrcmp((line + fromend1), (line + fromend1 - 1)) == LESS)
             {
                 swap1(line + fromend1, line + fromend1 - 1);
-                b = TRUE;
+                b = true;
             }
     }
 

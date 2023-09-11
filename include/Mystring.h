@@ -1,8 +1,10 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include "TXlib.h"
 #include <ctype.h>
+#include <cstdlib>
+#include <stdio.h>
+#include <stdbool.h>
 #include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>

@@ -1,5 +1,5 @@
-#include "Mystring.h"
-#include "io.h"
+#include "../include/Mystring.h"
+#include "../include/io.h"
 
 char *InputBuffer (char *FileName, Lengths *Length)
 {

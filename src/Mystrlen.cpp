@@ -1,4 +1,4 @@
-#include "Mystring.h"
+#include "../include/Mystring.h"
 
 size_t Mystrlen(const char *str)
 {

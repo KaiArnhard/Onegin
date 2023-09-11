@@ -1,5 +1,5 @@
-#include "Mystring.h"
-#include "io.h"
+#include "../include/Mystring.h"
+#include "../include/io.h"
 
 void OutputOrigin(char *Buffer, Lengths Length, char *FileName)
 {

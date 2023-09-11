@@ -1,6 +1,6 @@
-#include "Mystring.h"
-#include "io.h"
-#include "comparefunctions.h"
+#include "../include/Mystring.h"
+#include "../include/io.h"
+#include "../include/comparefunctions.h"
 
 int main()
 {
